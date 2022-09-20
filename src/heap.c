@@ -3,11 +3,15 @@
 #include "debug.h"
 #include "tlsf/tlsf.h"
 
+#include <stdlib.h>
+
 #include <stddef.h>
 #include <stdio.h>
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+
+#define MAX_POOL 10
 
 typedef struct arena_t
 {
@@ -21,6 +25,17 @@ typedef struct heap_t
 	size_t grow_increment;
 	arena_t* arena;
 } heap_t;
+
+//Function that prints the call stack of lost memory
+static void default_walker_p(void* ptr, size_t size, int used, void* user)
+{
+	(void)user;
+
+	if (used == 1) 
+	{
+		debug_backtrace_print(ptr, size, used, user);
+	}
+}
 
 heap_t* heap_create(size_t grow_increment)
 {
@@ -67,6 +82,7 @@ void* heap_alloc(heap_t* heap, size_t size, size_t alignment)
 
 		address = tlsf_memalign(heap->tlsf, alignment, size);
 	}
+
 	return address;
 }
 
@@ -82,7 +98,9 @@ void heap_destroy(heap_t* heap)
 	arena_t* arena = heap->arena;
 	while (arena)
 	{
+		tlsf_walk_pool(arena->pool, default_walker_p, NULL);
 		arena_t* next = arena->next;
+		
 		VirtualFree(arena, 0, MEM_RELEASE);
 		arena = next;
 	}

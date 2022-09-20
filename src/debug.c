@@ -66,7 +66,36 @@ void debug_print(uint32_t type, _Printf_format_string_ const char* format, ...)
 	WriteConsoleA(out, buffer, bytes, &written, NULL);
 }
 
-int debug_backtrace(void** stack, int stack_capacity)
+void debug_backtrace_print(void* ptr, size_t size, int used, void* user)
 {
-	return CaptureStackBackTrace(1, stack_capacity, stack, NULL);
+	#define MAX_POOL 10
+
+	//Prints size of the leak
+	printf("Memory leak of size %d bytes with callstack:\n", (unsigned int)size);
+
+	SymSetOptions(0x00000002 | 0x00000004);
+
+	HANDLE process = GetCurrentProcess();
+	SymInitialize(process, NULL, TRUE);
+
+	void* maxPool[10];
+	unsigned short stacks = CaptureStackBackTrace(4, MAX_POOL, maxPool, NULL);
+	char buffer[sizeof(SYMBOL_INFO) + MAX_SYM_NAME * sizeof(TCHAR)];
+	PSYMBOL_INFO pSymbol = (PSYMBOL_INFO)buffer;
+
+	pSymbol->SizeOfStruct = sizeof(SYMBOL_INFO);
+	pSymbol->MaxNameLen = MAX_SYM_NAME;
+
+	int toF = 0;
+
+	//Prints call stack, and stops at the main frame.
+	for (int i = 0; i < MAX_POOL; i++)
+	{
+		SymFromAddr(process, (DWORD64)(maxPool[i]), 0, pSymbol);
+		printf("[%d] %s \n", i, pSymbol->Name);
+		int ee = strcmp(pSymbol->Name, "main");
+
+		if (toF == 1) { break; }
+		if (ee) { toF = 1; }
+	}
 }

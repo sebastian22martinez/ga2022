@@ -23,7 +23,8 @@ void debug_set_print_mask(uint32_t mask);
 // See debug_set_print_mask.
 void debug_print(uint32_t type, _Printf_format_string_ const char* format, ...);
 
-// Capture a list of addresses that make up the current function callstack.
-// On return, stack contains at most stack_capacity addresses.
-// The number of addresses captured is the return value.
-int debug_backtrace(void** stack, int stack_capacity);
+
+
+//This function is called when non-freed memory is about to be leaked
+//Prints the call stack and number of bytes lost.
+void debug_backtrace_print(void* ptr, size_t size, int used, void* user);
