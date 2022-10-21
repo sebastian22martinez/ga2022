@@ -30,7 +30,7 @@ int main(int argc, const char* argv[])
 	timer_object_t* root_time = timer_object_create(heap, NULL);
 
 	// THIS IS THE MAIN LOOP!
-	while (!wm_pump(window))
+	/*while (!wm_pump(window))
 	{
 		timer_object_update(root_time);
 
@@ -46,7 +46,7 @@ int main(int argc, const char* argv[])
 			timer_object_get_ms(root_time),
 			mask,
 			x, y);
-	}
+	}*/
 
 	timer_object_destroy(root_time);
 	wm_destroy(window);
