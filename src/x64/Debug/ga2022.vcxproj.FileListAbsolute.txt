@@ -1,3 +1,5 @@
 C:\projects\gamearch-2022\ga2022\src\x64\Debug\ga2022.exe
 C:\Users\martis10\Desktop\GSAS Classes\GameArchitecture\ga2022\src\x64\Debug\ga2022.exe
 C:\Users\martis10\Desktop\GSAS Classes\GameArchitecture\ga2022\src\x64\Debug\ga2022.pdb
+C:\Users\martis10\Desktop\GSAS Classes\GameArchitecture\gaFinal2022V2\src\x64\Debug\ga2022.exe
+C:\Users\martis10\Desktop\GSAS Classes\GameArchitecture\gaFinal2022V2\src\x64\Debug\ga2022.pdb

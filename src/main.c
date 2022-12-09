@@ -2,9 +2,11 @@
 #include "fs.h"
 #include "heap.h"
 #include "render.h"
-#include "frogger_game.h"
+#include "final_game.h"
 #include "timer.h"
 #include "wm.h"
+
+#include <stdio.h>
 
 int main(int argc, const char* argv[])
 {
@@ -18,38 +20,20 @@ int main(int argc, const char* argv[])
 	wm_window_t* window = wm_create(heap);
 	render_t* render = render_create(heap, window);
 
-	frogger_game_t* game = frogger_game_create(heap, fs, window, render, argc, argv);
+	final_game_t* game = final_game_create(heap, fs, window, render, argc, argv);
 
 //<<<<<<< HEAD
-	// THIS IS THE MAIN LOOP!
-	/*while (!wm_pump(window))
-	{
-		timer_object_update(root_time);
-
-		int x, y;
-		wm_get_mouse_move(window, &x, &y);
-
-		uint32_t mask = wm_get_mouse_mask(window);
-
-		uint32_t now = timer_ticks_to_ms(timer_get_ticks());
-		debug_print(
-			k_print_info,
-			"T=%dms, MOUSE mask=%x move=%dx%d\n",
-			timer_object_get_ms(root_time),
-			mask,
-			x, y);
-	}*/
 //=======
 	while (!wm_pump(window))
 	{
-		frogger_game_update(game);
+		final_game_update(game);
 	}
 //>>>>>>> 31f169e4ae5f8184137dae6b65476247bab9e55b
 
 	/* XXX: Shutdown render before the game. Render uses game resources. */
 	render_destroy(render);
 
-	frogger_game_destroy(game);
+	final_game_destroy(game);
 
 	wm_destroy(window);
 	fs_destroy(fs);

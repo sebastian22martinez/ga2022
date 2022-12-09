@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,11 +155,44 @@
     <ClCompile Include="debug.c" />
     <ClCompile Include="ecs.c" />
     <ClCompile Include="event.c" />
+    <ClCompile Include="final_game.c" />
     <ClCompile Include="frogger_game.c" />
     <ClCompile Include="fs.c" />
     <ClCompile Include="gpu.c" />
     <ClCompile Include="heap.c" />
     <ClCompile Include="lecture7.c" />
+    <ClCompile Include="lua\lapi.c" />
+    <ClCompile Include="lua\lauxlib.c" />
+    <ClCompile Include="lua\lbaselib.c" />
+    <ClCompile Include="lua\lcode.c" />
+    <ClCompile Include="lua\lcorolib.c" />
+    <ClCompile Include="lua\lctype.c" />
+    <ClCompile Include="lua\ldblib.c" />
+    <ClCompile Include="lua\ldebug.c" />
+    <ClCompile Include="lua\ldo.c" />
+    <ClCompile Include="lua\ldump.c" />
+    <ClCompile Include="lua\lfunc.c" />
+    <ClCompile Include="lua\lgc.c" />
+    <ClCompile Include="lua\linit.c" />
+    <ClCompile Include="lua\liolib.c" />
+    <ClCompile Include="lua\llex.c" />
+    <ClCompile Include="lua\lmathlib.c" />
+    <ClCompile Include="lua\lmem.c" />
+    <ClCompile Include="lua\loadlib.c" />
+    <ClCompile Include="lua\lobject.c" />
+    <ClCompile Include="lua\lopcodes.c" />
+    <ClCompile Include="lua\loslib.c" />
+    <ClCompile Include="lua\lparser.c" />
+    <ClCompile Include="lua\lstate.c" />
+    <ClCompile Include="lua\lstring.c" />
+    <ClCompile Include="lua\lstrlib.c" />
+    <ClCompile Include="lua\ltable.c" />
+    <ClCompile Include="lua\ltablib.c" />
+    <ClCompile Include="lua\ltm.c" />
+    <ClCompile Include="lua\lundump.c" />
+    <ClCompile Include="lua\lutf8lib.c" />
+    <ClCompile Include="lua\lvm.c" />
+    <ClCompile Include="lua\lzio.c" />
     <ClCompile Include="lz4\lz4.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="mat4f.c" />
@@ -184,10 +217,39 @@
     <ClInclude Include="debug.h" />
     <ClInclude Include="ecs.h" />
     <ClInclude Include="event.h" />
+    <ClInclude Include="final_game.h" />
     <ClInclude Include="frogger_game.h" />
     <ClInclude Include="fs.h" />
     <ClInclude Include="gpu.h" />
     <ClInclude Include="heap.h" />
+    <ClInclude Include="lua\lapi.h" />
+    <ClInclude Include="lua\lauxlib.h" />
+    <ClInclude Include="lua\lcode.h" />
+    <ClInclude Include="lua\lctype.h" />
+    <ClInclude Include="lua\ldebug.h" />
+    <ClInclude Include="lua\ldo.h" />
+    <ClInclude Include="lua\lfunc.h" />
+    <ClInclude Include="lua\lgc.h" />
+    <ClInclude Include="lua\ljumptab.h" />
+    <ClInclude Include="lua\llex.h" />
+    <ClInclude Include="lua\llimits.h" />
+    <ClInclude Include="lua\lmem.h" />
+    <ClInclude Include="lua\lobject.h" />
+    <ClInclude Include="lua\lopcodes.h" />
+    <ClInclude Include="lua\lopnames.h" />
+    <ClInclude Include="lua\lparser.h" />
+    <ClInclude Include="lua\lprefix.h" />
+    <ClInclude Include="lua\lstate.h" />
+    <ClInclude Include="lua\lstring.h" />
+    <ClInclude Include="lua\ltable.h" />
+    <ClInclude Include="lua\ltm.h" />
+    <ClInclude Include="lua\lua.h" />
+    <ClInclude Include="lua\lua.hpp" />
+    <ClInclude Include="lua\luaconf.h" />
+    <ClInclude Include="lua\lualib.h" />
+    <ClInclude Include="lua\lundump.h" />
+    <ClInclude Include="lua\lvm.h" />
+    <ClInclude Include="lua\lzio.h" />
     <ClInclude Include="lz4\lz4.h" />
     <ClInclude Include="mat4f.h" />
     <ClInclude Include="math.h" />
@@ -237,6 +299,12 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">vulkan\glslc.exe -c "%(FullPath)" -o "%(FullPath).spv"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(FullPath).spv</Outputs>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="HelloLua.lua" />
+    <None Include="moduletutorial.lua" />
+    <None Include="mymath.lua" />
+    <None Include="tables.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
